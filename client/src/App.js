@@ -113,6 +113,7 @@ class App extends Component {
 
 
   render() { 
+    console.log(process.env.NODE_ENV);
     const { newUser, message } = this.state;
     return (  
       <div className="App-Contianer">

@@ -1,1 +1,9 @@
-{}
+{
+	"auth": {
+		"twittermitalletapiobcd49b03": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": []
+		}
+	}
+}

@@ -10,6 +10,11 @@
             "StackName": "amplify-twittermitalletapio-twitterenv-93452",
             "StackId": "arn:aws:cloudformation:us-east-2:723602329199:stack/amplify-twittermitalletapio-twitterenv-93452/692c1220-9782-11ea-9694-0247ef85be9c",
             "AmplifyAppId": "d296oxlh46t13s"
+        },
+        "categories": {
+            "auth": {
+                "twittermitalletapiobcd49b03": {}
+            }
         }
     }
 }

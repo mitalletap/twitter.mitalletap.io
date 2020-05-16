@@ -1,0 +1,33 @@
+{
+  "name": "twitter.mitalletap.io",
+  "version": "1.0.0",
+  "description": "twitter.mitalletap.io",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mitalletap/twitter.mitalletap.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mitalletap/twitter.mitalletap.io/issues"
+  },
+  "homepage": "https://github.com/mitalletap/twitter.mitalletap.io#readme",
+  "dependencies": {
+    "concurrently": "^5.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.14",
+    "nodemon": "^2.0.4"
+  },
+  "devDependencies": {
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "jest-cli": "^26.0.1"
+  }
+}

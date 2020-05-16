@@ -1,0 +1,15 @@
+{
+    "twitterenv": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-twittermitalletapio-twitterenv-93452-authRole",
+            "UnauthRoleArn": "arn:aws:iam::723602329199:role/amplify-twittermitalletapio-twitterenv-93452-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::723602329199:role/amplify-twittermitalletapio-twitterenv-93452-authRole",
+            "Region": "us-east-2",
+            "DeploymentBucketName": "amplify-twittermitalletapio-twitterenv-93452-deployment",
+            "UnauthRoleName": "amplify-twittermitalletapio-twitterenv-93452-unauthRole",
+            "StackName": "amplify-twittermitalletapio-twitterenv-93452",
+            "StackId": "arn:aws:cloudformation:us-east-2:723602329199:stack/amplify-twittermitalletapio-twitterenv-93452/692c1220-9782-11ea-9694-0247ef85be9c",
+            "AmplifyAppId": "d296oxlh46t13s"
+        }
+    }
+}

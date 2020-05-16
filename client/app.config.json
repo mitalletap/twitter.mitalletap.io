@@ -1,0 +1,10 @@
+{
+    "apps": [
+      {
+        "name": "client",
+        "script": "npx",
+        "interpreter": "none",
+        "args": "serve -s build -l 3000"
+      }
+    ]
+}

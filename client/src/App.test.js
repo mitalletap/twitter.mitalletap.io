@@ -1,9 +1,7 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import App from './App';
+describe('base test', () => {
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  it('should be basic', () => {
+    expect(2).toBe(2);
+  });
+
 });

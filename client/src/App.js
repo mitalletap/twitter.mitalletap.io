@@ -3,6 +3,7 @@ import Amplify, { Auth } from 'aws-amplify';
 import { withAuthenticator } from 'aws-amplify-react';
 import aws_exports from './aws-exports';
 import { Input, Button } from 'antd';
+import HelperFunction from './helpers/helper';
 
 
 import './App.css';
@@ -17,27 +18,28 @@ Amplify.configure(aws_exports);
 const signUpConfig = {
   hiddenDefaults: ["username"],
   defaultCountryCode: '1',
-  signUpFields: [{
-    label: "Name",
-    key: 'name',
-    required: true,
-    displayOrder: 1,
-    type: 'string'
-  },
-  {
-    label: "Username",
-    key: 'preferred_username',
-    required: true,
-    displayOrder: 2,
-    type: 'string'
-  },
-  {
-    label: "Data of Birth",
-    key: 'birthdate',
-    required: true,
-    displayOrder: 3,
-    type: 'date'
-  }
+  signUpFields: [
+    {
+      label: "Name",
+      key: 'name',
+      required: true,
+      displayOrder: 1,
+      type: 'string'
+    },
+    {
+      label: "Username",
+      key: 'preferred_username',
+      required: true,
+      displayOrder: 2,
+      type: 'string'
+    },
+    {
+      label: "Data of Birth",
+      key: 'birthdate',
+      required: true,
+      displayOrder: 3,
+      type: 'date'
+    }
   ]
 
 
@@ -74,7 +76,8 @@ class App extends Component {
           name: name,
           username: username
         }
-        fetch(`http://localhost:8080/user/${username}`, {
+        const URL = HelperFunction.getEnvironmentStatus();
+        fetch(`http://${URL}/user/${username}`, {
           method: 'POST',
           body: JSON.stringify(message),
           headers: {

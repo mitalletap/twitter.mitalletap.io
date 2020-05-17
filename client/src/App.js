@@ -62,6 +62,7 @@ class App extends Component {
 
 
   componentDidMount() {
+    console.log(process.env.NODE_ENV);
     Auth.currentAuthenticatedUser()
     .then((res) => {
       this.setState({ 
@@ -71,12 +72,14 @@ class App extends Component {
         username : res.attributes.preferred_username,
         newUser: ''
       }, () => {
+        console.log(res);
         const { username, name } = this.state;
         const message = {
           name: name,
           username: username
         }
         const URL = HelperFunction.getEnvironmentStatus();
+        console.log(URL)
         fetch(`http://${URL}/user/${username}`, {
           method: 'POST',
           body: JSON.stringify(message),
@@ -87,7 +90,8 @@ class App extends Component {
         .then((res) => res.json())
         .catch(err => console.log(err));
       })
-    });
+    })
+    .catch(err => console.log(err));
   }
 
   handleChange = (e) => {
@@ -116,17 +120,17 @@ class App extends Component {
 
 
   render() { 
-    console.log(process.env.NODE_ENV);
     const { newUser, message } = this.state;
     return (  
       <div className="App-Contianer">
         <Button onClick={() => {this.handleSubmit()}}> Add User </Button>
-        <TextArea rows={4} placeholder="Username" onChange={this.handleChange}/>
+        <TextArea className="post-button" rows={4} placeholder="Username" onChange={this.handleChange}/>
         <h1> {message} </h1>
       </div>
     );
   }
 }
- 
+//  export default App;
 export default withAuthenticator(App, { signUpConfig });
+// export default withAuthenticator(App, true);
 

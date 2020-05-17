@@ -10,6 +10,7 @@
     "aws-amplify": "^3.0.11",
     "aws-amplify-react": "^4.1.10",
     "babel-jest": "^24.9.0",
+    "node-fetch": "^2.6.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
@@ -20,7 +21,18 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:ci": "CI=true jest --no-watchman",
+    "test:coverage": "react-scripts test --coverage --watch-all",
     "eject": "react-scripts eject"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!src/index.js",
+      "!src/serviceWorker.js",
+      "!src/aws-exports.js",
+      "!src/tempPolyfills.js"
+    ]
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -36,5 +48,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "fetch-mock": "^9.9.0",
+    "jest-cli": "^26.0.1"
   }
 }

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "test:ci": "CI=true jest --no-watchman",
+    "test:ci": "cd client && npm run test:ci",
     "test:coverage": "jest --coverage --watch-all",
     "build": "cd client && npm run build"
   },
@@ -29,9 +29,5 @@
     "mongoose": "^5.9.14",
     "nodemon": "^2.0.4"
   },
-  "devDependencies": {
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.2",
-    "jest-cli": "^26.0.1"
-  }
+  "devDependencies": {}
 }

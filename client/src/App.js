@@ -1,19 +1,24 @@
 import React, { Component } from 'react';
-import Amplify, { Auth } from 'aws-amplify';
+import Amplify from 'aws-amplify';
 import { withAuthenticator } from 'aws-amplify-react';
+import { Layout, Menu, Input, Button } from 'antd';
 import aws_exports from './aws-exports';
-import { Input, Button } from 'antd';
-import HelperFunction from './helpers/helper';
-
+import Home from './components/Home';
+import Post from './components/Post';
+import NavBar from './components/NavBar';
+import Friends from './components/Friends';
+import Notifications from './components/Notifications';
+import Profile from './components/Profile';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as actionCreators from './actions/rootAction';
 
 import './App.css';
 import '@aws-amplify/ui/dist/style.css';
 import 'antd/dist/antd.css';
 
-
-const { TextArea } = Input;
-
 Amplify.configure(aws_exports);
+const { Header, Content, Footer, Sider } = Layout;
 
 const signUpConfig = {
   hiddenDefaults: ["username"],
@@ -41,96 +46,51 @@ const signUpConfig = {
       type: 'date'
     }
   ]
-
-
 }
 
 
-class App extends Component {
-  constructor(props) {
+export class App extends Component {
+  constructor(props){
     super(props);
-    this.state = {
-      username: '',
-      name: '',
-      dob: '',
-      email: '',
-      phone_number: '',
-      message: ''
-    }
   }
-
-
-
+  
   componentDidMount() {
-    console.log(process.env.NODE_ENV);
-    Auth.currentAuthenticatedUser()
-    .then((res) => {
-      this.setState({ 
-        email: res.attributes.email,
-        name: res.attributes.name,
-        phone_number: res.attributes.phone_number,
-        username : res.attributes.preferred_username,
-        newUser: ''
-      }, () => {
-        console.log(res);
-        const { username, name } = this.state;
-        const message = {
-          name: name,
-          username: username
-        }
-        const URL = HelperFunction.getEnvironmentStatus();
-        console.log(URL)
-        fetch(`http://${URL}/user/${username}`, {
-          method: 'POST',
-          body: JSON.stringify(message),
-          headers: {
-            'content-type': 'application/json'
-          }
-        })
-        .then((res) => res.json())
-        .catch(err => console.log(err));
-      })
-    })
-    .catch(err => console.log(err));
+    this.props.loadUserData();
   }
-
-  handleChange = (e) => {
-    this.setState({ message: e.target.value});
-  }
-
-  handleSubmit = () => {
-    const { username, message } = this.state;
-    const object = {
-      username: username,
-      message: message
-    }
-    console.log(object);
-    fetch("http://localhost:8080/post/", {
-      method: 'POST',
-      body: JSON.stringify(object),
-      headers: {
-        'content-type': 'application/json'
-      }
-    })
-    .then((res) => res.json())
-    .then((result) => console.log(result))
-    .catch(err => console.log(err));
-  }
-
-
 
   render() { 
-    const { newUser, message } = this.state;
     return (  
-      <div className="App-Contianer">
-        <Button onClick={() => {this.handleSubmit()}}> Add User </Button>
-        <TextArea className="post-button" rows={4} placeholder="Username" onChange={this.handleChange}/>
-        <h1> {message} </h1>
+      <div className="app-container">
+        <Router>
+            <Layout className="app-content">
+              <Sider breakpoint="lg" collapsedWidth="auto" className="sider-navbar" theme="dark" width={200}>
+                  <NavBar {...this.props} />
+              </Sider>
+              <Layout className="app-center-content">
+                <Layout>
+                  <Content>
+                    <Switch>
+                      <Route exact path="/"><Home {...this.props} /></Route>
+                      <Route exact path="/friends"><Friends /></Route>
+                      <Route exact path="/profile"><Profile /></Route>
+                      <Route exact path="/notifications"><Notifications /></Route>
+                      <Route exact path="/create-post"><Post {...this.props} /></Route>
+                      <Route exact path="/u/:username"><Home /></Route>
+                    </Switch>
+                  </Content>
+                </Layout>
+              </Layout>
+            </Layout>
+          </Router>
       </div>
     );
   }
 }
-//  export default App;
-export default withAuthenticator(App, { signUpConfig });
-// export default withAuthenticator(App, true);
 
+const mapStateToProps = (state) => {
+  return state;
+}
+
+
+// export default withAuthenticator(App, { signUpConfig });
+export default withAuthenticator(connect(mapStateToProps, actionCreators)(App), {signUpConfig});

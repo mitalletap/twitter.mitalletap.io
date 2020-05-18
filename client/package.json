@@ -11,11 +11,15 @@
     "aws-amplify": "^3.0.11",
     "aws-amplify-react": "^4.1.10",
     "babel-jest": "^24.9.0",
+    "moment": "^2.25.3",
     "node-fetch": "^2.6.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0"
   },
   "proxy": "http://localhost:3000/",
   "scripts": {

@@ -60,7 +60,7 @@ export class Home extends Component {
           return (
             <Row gutter={[16, 16]} id={`row-${index}`} className="home-grid-row">
               <Col flex="auto" span={8} className="home-grid-col grid-col-min" />
-              <Col flex="500px" align="middle" span={8} className="home-grid-col" style={{ minWidth: "300px" }}> <PostItem username={post.username} message={post.message} createdAt={post.createdAt} _id={post._id} /> </Col>
+              <Col flex="500px" align="middle" span={8} className="home-grid-col" style={{ minWidth: "300px" }}> <PostItem username={post.username} message={post.message} createdAt={post.createdAt} _id={post._id} profilePicture={post.profilePicture}/> </Col>
               <Col flex="auto" span={8} className="home-grid-col grid-col-min" />
             </Row>
           )

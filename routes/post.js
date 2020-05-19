@@ -23,23 +23,44 @@ router.get('/', (req, res) => {
 
 // Save a post to the database
 router.post('/', (req, res) => {
-    console.log(req.body);
     if(isValid(req.body)) {
-        const newPost = new Post({
-            _id: new mongoose.Types.ObjectId,
-            username: req.body.username,
-            message: req.body.message
-        });
-        User.findOneAndUpdate({ username: req.body.username }, { $push: { posts: newPost } }, function(err, succ) {
+        var url; 
+        var username = req.body.username;
+        User.find({ 'username': username }, function(err, succ) {
             if(err) {
-                console.log(err);
+                console.log(`An error occured:`, err);
+                res.json(400);
             } else {
-                newPost.save()
-                .then(() => console.log(`Saved message: ${req.body.message}`))
-                .catch(err => console.log(err));
+                if(succ.length > 0) {
+                    console.log(url);
+                    url = succ[0].profilePicture
+                    const newPost = new Post({
+                        _id: new mongoose.Types.ObjectId,
+                        username: req.body.username,
+                        message: req.body.message,
+                        "Hello": "World",
+                        profilePicture: url
+                    });
+                    newPost.save()
+                    .then(() => console.log(`Saved message: ${req.body.message}`))
+                    .catch(err => console.log(err));
+                    console.log(url);
+            
+                    // User.findOneAndUpdate({ username: username }, { $push: { posts: newPost } }, function(err, succ) {
+                    //     if(err) {
+                    //         console.log(err);
+                    //     } else {
+                            // newPost.save()
+                            // .then(() => console.log(`Saved message: ${req.body.message}`))
+                            // .catch(err => console.log(err));
+                    //     }
+                    // })
+                    res.send(true);
+                }
             }
-        })
-        res.send(true);
+        });
+
+        
     } else {
         res.json({ "response": "post is not valid" });
     }

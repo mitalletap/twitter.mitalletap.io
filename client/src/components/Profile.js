@@ -3,7 +3,6 @@ import { Row, Col, Avatar, Descriptions, Spin, Button } from 'antd';
 import moment from 'moment';
 import { Link } from 'react-router-dom'
 import { LoadingOutlined } from '@ant-design/icons';
-import background from '../images/stormtrooper.jpg';
 import HelperFunctions from '../helpers/helper';
 import PostItem from '../components/PostItem';
 
@@ -50,7 +49,6 @@ class Profile extends Component {
 
     render() { 
         const { user, posts } = this.state;
-        console.log(posts);
         var time = moment(user.createdAt).format('LLL');
         return (  
             user.following === undefined ? 
@@ -62,7 +60,7 @@ class Profile extends Component {
                 <div className="profile-banner">
                     <div className="profile-banner-image" style={{ backgroundImage: `url(${user.profileCover})`}} />
                     <div className="profile-banner-avatar">
-                        <Avatar size={200} src={`${user.profilePicture}`}>M</Avatar>
+                        <Avatar size={200} src={posts[0] !== undefined ? `${user.profilePicture}` : 'www.google.com'}>M</Avatar>
                     </div>
                     
                 </div> 
@@ -82,7 +80,7 @@ class Profile extends Component {
                         return (
                             <Row gutter={[16, 16]} id={`row-${index}`} className="profile-grid-row">
                                 <Col flex="auto" span={8} className="profile-grid-col grid-col-min" />
-                                <Col flex="500px" align="middle" span={8} className="profile-grid-col" style={{ minWidth: "300px" }}> <PostItem username={post.username} message={post.message} createdAt={post.createdAt} _id={post._id} /> </Col>
+                                <Col flex="500px" align="middle" span={8} className="profile-grid-col" style={{ minWidth: "300px" }}> <PostItem username={post.username} message={post.message} createdAt={post.createdAt} _id={post._id} profilePicture={user.profilePicture}/> </Col>
                                 <Col flex="auto" span={8} className="profile-grid-col grid-col-min" />
                             </Row>
                         )

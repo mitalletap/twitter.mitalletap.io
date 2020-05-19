@@ -3,6 +3,7 @@
   --primary-color: #163460;
   --secondary-color: #63cdda ;
   --background-default: #021C33;
+  overflow: hidden;
 }
 
 h1 {
@@ -45,7 +46,6 @@ h1 {
   height: 100px !important;
 }
 
-
 .home-content {
   background-color: var(--primary-color);
   padding-top: 100px;
@@ -54,6 +54,7 @@ h1 {
 
 .home-grid-row {
   margin: 0px !important;
+  /* background-color: darkslategray; */
 }
 
 .home-grid-col {
@@ -84,3 +85,72 @@ h1 {
   float: right;
   color: #a1afb2 !important;
 } 
+
+
+
+/* Profile */
+.profile-container {
+  overflow: auto;
+  background-color: var(--primary-color);
+  height: 100%;
+}
+
+.profile-banner {
+  height: 40%;
+}
+
+.profile-banner-image {
+  filter: blur(5px);
+  height: 100%;
+  background-size: cover;
+  background-position-y: center;
+}
+
+.profile-banner-avatar {
+  z-index:  2;
+  filter: blur(0);
+  position: relative;
+  top: -300px;
+  left: 100px;
+  width: 10%;
+}
+
+.profile-data {
+  padding-top: 10px;
+  background-color: var(--background-default);
+  height: auto;
+  
+}
+
+.loading {
+  background-color: var(--primary-color);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 40%;
+  transform: translateY(40%);
+
+}
+
+.profile-grid {
+}
+
+.profile-grid-row {
+  margin: 0px !important;
+  /* background-color: darkslategray; */
+}
+
+.profile-grid-col {
+  /* background-color: dodgerblue; */
+  margin: 10px;
+}
+
+.grid-col-min {
+  min-width: 0px;
+}
+
+
+.edit-profile-container {
+  background-color: var(--primary-color);
+  height: 100%;
+}

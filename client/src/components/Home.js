@@ -15,8 +15,9 @@ export class Home extends Component {
     }
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const URL = HelperFunction.getEnvironmentStatus();
+    await this.props.loadUserData()
     this.saveUserToDB(URL);
     this.getAllPosts(URL);
     
@@ -30,7 +31,7 @@ export class Home extends Component {
       }
     })
     .then((res) => res.json())
-    .then(response => this.setState({ posts: response.reverse() }, console.log(response)))
+    .then(response => this.setState({ posts: response }))
   }
 
   saveUserToDB = (URL) => {
@@ -58,9 +59,9 @@ export class Home extends Component {
         {posts.map(function(post, index) {
           return (
             <Row gutter={[16, 16]} id={`row-${index}`} className="home-grid-row">
-              <Col flex="auto" span={8} className="home-grid-col" style={{ minWidth: "0px" }}/>
+              <Col flex="auto" span={8} className="home-grid-col grid-col-min" />
               <Col flex="500px" align="middle" span={8} className="home-grid-col" style={{ minWidth: "300px" }}> <PostItem username={post.username} message={post.message} createdAt={post.createdAt} _id={post._id} /> </Col>
-              <Col flex="auto" span={8} className="home-grid-col" style={{ minWidth: "0px" }}/>
+              <Col flex="auto" span={8} className="home-grid-col grid-col-min" />
             </Row>
           )
         })}

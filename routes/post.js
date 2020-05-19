@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
             res.send("Something went wrong");
             next();
         }
-        res.json(succ);
+        res.json(succ.reverse());
     });
     console.log("Accessing all posts");
 })
@@ -48,14 +48,12 @@ router.post('/', (req, res) => {
 // Get all posts for a specific user
 router.get('/:username', (req, res) => {
     var username = req.params.username;
-    console.log(`finding posts for ${username}`)
-    User.find({ 'username': username }, function(err, succ) {
+    Post.find({ 'username': username }, function(err, succ) {
         if(err){
             console.log('There was an error: ' + err);
             res.json(400);
         } else {
-            console.log(`Displaying all posts for ${username}`);
-            res.json(succ[0].posts);
+            res.json(succ.reverse());
         }
     })
 });

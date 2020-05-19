@@ -9,6 +9,7 @@ import NavBar from './components/NavBar';
 import Friends from './components/Friends';
 import Notifications from './components/Notifications';
 import Profile from './components/Profile';
+import EditProfile from './components/EditProfile';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actionCreators from './actions/rootAction';
@@ -71,11 +72,12 @@ export class App extends Component {
                   <Content>
                     <Switch>
                       <Route exact path="/"><Home {...this.props} /></Route>
-                      <Route exact path="/friends"><Friends /></Route>
-                      <Route exact path="/profile"><Profile /></Route>
-                      <Route exact path="/notifications"><Notifications /></Route>
+                      <Route exact path="/friends"><Friends {...this.props} /></Route>
+                      <Route exact path="/profile"><Profile {...this.props} /></Route>
+                      <Route exact path="/profile/edit"><EditProfile {...this.props} /></Route>
+                      <Route exact path="/notifications"><Notifications {...this.props} /></Route>
                       <Route exact path="/create-post"><Post {...this.props} /></Route>
-                      <Route exact path="/u/:username"><Home /></Route>
+                      <Route exact path="/u/:username"><Home {...this.props} /></Route>
                     </Switch>
                   </Content>
                 </Layout>

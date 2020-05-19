@@ -14,6 +14,9 @@ const UserSchema = new mongoose.Schema({
     posts: [PostSchema],
     followers: [FriendSchema],
     following: [FriendSchema],
+    profilePicture: String,
+    profileCover: String,
+    dob: Date
 }, { timestamps: true });
 
 module.exports = mongoose.model('User', UserSchema);

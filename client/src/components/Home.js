@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import HelperFunction from '../helpers/helper';
 import PostItem from './PostItem';
-import { Row, Col } from 'antd';
+import { Row, Col, Spin } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 
 import '../App.css';
 import '@aws-amplify/ui/dist/style.css';
@@ -17,7 +18,7 @@ export class Home extends Component {
 
   async componentDidMount() {
     const URL = HelperFunction.getEnvironmentStatus();
-    await this.props.loadUserData()
+    await this.props.loadUserCredentials()
     this.saveUserToDB(URL);
     this.getAllPosts(URL);
     
@@ -55,6 +56,11 @@ export class Home extends Component {
     const { username } = this.props;
     const { posts } = this.state;
     return (  
+
+      posts.length === 0 ? 
+      <div className="app-container">
+          <Spin className="loading" indicator={<LoadingOutlined style={{ fontSize: 240 }} spin />} />
+      </div> :
       <div className="home-content">
         {posts.map(function(post, index) {
           return (

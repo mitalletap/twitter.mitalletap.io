@@ -15,7 +15,7 @@ class PostItem extends Component {
         return (  
             <div className="post-item-container">
                 <div>
-                    <a href="http://www.google.com"> <Avatar src={this.props.profilePicture}>{this.props.username[0].toUpperCase()}</Avatar> </a>
+                    <a href={`http://localhost:3000/u/${this.props.username}`}> <Avatar src={this.props.profilePicture}>{this.props.username[0].toUpperCase()}</Avatar> </a>
                 </div>
                 <div className="post-item-time">
                     <h1> {time} </h1>

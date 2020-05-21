@@ -45,16 +45,6 @@ router.post('/', (req, res) => {
                     .then(() => console.log(`Saved message: ${req.body.message}`))
                     .catch(err => console.log(err));
                     console.log(url);
-            
-                    // User.findOneAndUpdate({ username: username }, { $push: { posts: newPost } }, function(err, succ) {
-                    //     if(err) {
-                    //         console.log(err);
-                    //     } else {
-                            // newPost.save()
-                            // .then(() => console.log(`Saved message: ${req.body.message}`))
-                            // .catch(err => console.log(err));
-                    //     }
-                    // })
                     res.send(true);
                 }
             }

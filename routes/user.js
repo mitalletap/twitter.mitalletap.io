@@ -20,7 +20,8 @@ router.get('/:username', (req, res) => {
             res.json(400);
         } else {
             if(succ.length > 0) {
-                console.log(`Successfully found ${username}:`, succ);
+                console.log(`Successfully found ${username}:`);
+                console.log(succ)
                 res.json(succ);
             } else {
                 console.log(`${username} does not exist`);
@@ -97,32 +98,68 @@ router.get('/profile-images/:username', (req, res) => {
     });
 });
 
+// Check Following Status
+router.get('/check-following-status/:username/:searchedUsername', (req, res) => {
+    var username = req.params.username;
+    var searchedUsername = req.params.searchedUsername;
+    User.find({'username': username}, function(err, succ) {
+        if(err) {
+            res.json({status: 'failed'})
+        } else if(succ[0].followers.length === 0) {
+            console.log()
+            res.json({ "error": "no followers" })
+        } else {
+            for(var i = 0; i <= succ[0].followers.length; i++) {
+                console.log(succ[0].followers[i]);
+                if(succ[0].followers[i].username === searchedUsername){
+                    res.json({status: true})
+                    break;
+                } else {
+                    res.json({status: false})
+                    break;
+                }
+            }
+        }
+    })
+});
 
+// Add Follower/Following
+
+router.post('/add-follower/:username/:searchedUsername', async (req, res) => {
+    console.log("Checking Follow Status");
+    var username = req.params.username;
+    var searchedUsername = req.params.searchedUsername;
+    var status = req.body.status;
+    var startUserPP = req.body.startUserPP;
+    var endUserPP = req.body.endUserPP;
+
+    const searchedUsernameUpdate = { username: searchedUsername, profilePicture: endUserPP }
+    const usernameUpdate = { username: username, profilePicture: startUserPP }
+    const usernameNotification = { username: username, type: "Connection", resolved: false }
+
+    if(status === true) {
+        // Remove Follower
+        User.findOneAndUpdate({ username: username }, { $pull : { following: searchedUsernameUpdate } }, { new: true })
+        .catch((err) => console.log(err));
+
+        User.findOneAndUpdate({ username: searchedUsername }, { $pull : { followers: usernameUpdate } }, { new: true })
+        .catch((err) => console.log(err));
+        res.json({ "status": false });
+
+    } else {
+        // Add Follower
+        User.findOneAndUpdate({ username: username }, { $push : { following: searchedUsernameUpdate } }, { new: true })
+        .catch((err) => console.log(err));
+
+        User.findOneAndUpdate({ username: searchedUsername }, { $push : { followers: usernameUpdate, notifications: usernameNotification } }, { new: true })
+        .catch((err) => console.log(err));
+        res.json({ "status": true });
+    }
+});
 
 
 
 module.exports = router;
 
 
-
-
-
-// router.post('/update/:username', (req, res) => {
-//     User.find({ username: req.body.username }, function(err, succ) {
-//         const username = req.body.username;
-//         if(succ.length > 0) {
-//             console.log(`${username} found. Updating now`);
-//             const update = {
-//                 profilePicture: req.body.profilePicture,
-//                 profileCover: req.body.profileCover,
-//                 dob: req.body.dob
-//             }
-//             var resp = await User.findOneAndUpdate({ username: username }, update, { new: true });
-//             console.log(resp);
-//             res.send(succ);
-//         } else {
-//             console.log("User not found!");
-//         }
-//     })
-// });
 

@@ -1,6 +1,6 @@
 import { Auth } from "aws-amplify"
 
-export function loadUserData(){
+export function loadUserCredentials(){
     return(dispatch) => {
         return Auth.currentAuthenticatedUser()
         .then((response) => {

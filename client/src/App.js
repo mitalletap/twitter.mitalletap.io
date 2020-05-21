@@ -10,6 +10,8 @@ import Friends from './components/Friends';
 import Notifications from './components/Notifications';
 import Profile from './components/Profile';
 import EditProfile from './components/EditProfile';
+import PublicProfile from './components/PublicProfile';
+import HelperFunctions from './helpers/helper';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actionCreators from './actions/rootAction';
@@ -53,12 +55,35 @@ const signUpConfig = {
 export class App extends Component {
   constructor(props){
     super(props);
+    this.state = {
+      notifications: []
+    }
   }
   
-  componentDidMount() {
-    this.props.loadUserData();
+  async componentDidMount() {
+    const API = HelperFunctions.getEnvironmentStatus();
+    await this.props.loadUserCredentials();
+    await this.getUserData(API, this.props.username)
   }
 
+  getUserData(URL, user) {
+    fetch(`http://${URL}/user/${user}`, {
+      method: 'GET',
+      headers: {
+        'content-type': 'application/json'
+      }
+    })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      this.setState({ notifications: data[0].notifications })
+    })
+    .catch((err) => console.log(err));
+  }
+
+
+
+  
   render() { 
     return (  
       <div className="app-container">
@@ -75,9 +100,9 @@ export class App extends Component {
                       <Route exact path="/friends"><Friends {...this.props} /></Route>
                       <Route exact path="/profile"><Profile {...this.props} /></Route>
                       <Route exact path="/profile/edit"><EditProfile {...this.props} /></Route>
-                      <Route exact path="/notifications"><Notifications {...this.props} /></Route>
+                      <Route exact path="/notifications"><Notifications {...this.props} notifications={this.state.notifications} /></Route>
                       <Route exact path="/create-post"><Post {...this.props} /></Route>
-                      <Route exact path="/u/:username"><Home {...this.props} /></Route>
+                      <Route path="/u/:username" component={PublicProfile} /> 
                     </Switch>
                   </Content>
                 </Layout>

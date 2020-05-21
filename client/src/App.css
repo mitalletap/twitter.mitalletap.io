@@ -90,7 +90,7 @@ h1 {
 
 /* Profile */
 .profile-container {
-  overflow: auto;
+  overflow-x: hidden;
   background-color: var(--primary-color);
   height: 100%;
 }
@@ -133,6 +133,7 @@ h1 {
 }
 
 .profile-grid {
+  padding-top: 100px;
 }
 
 .profile-grid-row {
@@ -154,3 +155,59 @@ h1 {
   background-color: var(--primary-color);
   height: 100%;
 }
+
+
+.friends-container {
+  background-color: var(--primary-color);
+  height: 100%;
+}
+
+.friend-item {
+  width: 300px;
+  height: auto;
+  margin: 10px;
+  display: block;
+}
+
+.friend-item-profile-picture {
+  display: inline-block;
+  padding-right: 20px;
+  float: left;
+  width: 15%;
+}
+
+.friend-item-username {
+  display: inline-block;
+  width: 85%;
+  text-align: left;
+}
+
+
+.notifications-container {
+  overflow-x: hidden;
+  background-color: var(--primary-color);
+  height: 100%;
+}
+
+.notification-item {
+  border-radius: 25px;
+  padding: 20px;
+  display: block;
+  height: auto;
+  background-color: var(--background-default);
+}
+
+.notification-item-time {
+  display: block;
+  margin-top: 20px;
+}
+
+.notification-item-type {
+  display: inline-block;
+  width: 90%;
+}
+
+.notification-item-resolved {
+  display: block;
+  color: #a1afb2 !important;
+} 

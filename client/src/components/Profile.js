@@ -16,13 +16,15 @@ class Profile extends Component {
         super(props);
         this.state = {
             posts: [],
-            user: []
+            user: [],
+            API: '',
         }
     }
 
     async componentDidMount() {
         var user = await HelperFunctions.getCurrentUser();
         const API = HelperFunctions.getEnvironmentStatus();
+        await this.setState({ API: API });
         await this.getUserPosts(API, user.username);
         await this.getUserInformation(API, user.username);
     }
@@ -48,7 +50,7 @@ class Profile extends Component {
     }
 
     render() { 
-        const { user, posts } = this.state;
+        const { user, posts, API } = this.state;
         var time = moment(user.createdAt).format('LLL');
         return (  
             user.following === undefined ? 
@@ -69,7 +71,7 @@ class Profile extends Component {
                             <Descriptions.Item> <h1> Name: {user.name} </h1> </Descriptions.Item>
                             <Descriptions.Item> <h1> Username: {user.username} </h1> </Descriptions.Item>
                             <Descriptions.Item> <h1>Posts: {posts.length} </h1> </Descriptions.Item>
-                            <Descriptions.Item> <h1>Followers: {user.followers === undefined ? 'loading' : user.followers.length} </h1> </Descriptions.Item>
+                            <Descriptions.Item> <a href={`http://localhost:3000/friends`}> <h1>Followers: {user.followers === undefined ? 'loading' : user.followers.length} </h1> </a> </Descriptions.Item>
                             <Descriptions.Item> <h1>Following: {user.following === undefined ? 'loading' : user.following.length} </h1> </Descriptions.Item>
                             <Descriptions.Item> <h1>Date Joined: {time} </h1> </Descriptions.Item>
                             <Descriptions.Item> <Button> <Link to="/profile/edit"> Edit Profile </Link></Button> </Descriptions.Item>

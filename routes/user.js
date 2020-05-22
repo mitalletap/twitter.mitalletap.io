@@ -13,18 +13,13 @@ function isValid(object) {
 // Search for user
 router.get('/:username', (req, res) => {
     var username = req.params.username;
-    console.log(`Accessing user ${username}`)
     User.find({ 'username': username }, function(err, succ) {
         if(err) {
-            console.log(`An error occured:`, err);
             res.json(400);
         } else {
             if(succ.length > 0) {
-                console.log(`Successfully found ${username}:`);
-                console.log(succ)
                 res.json(succ);
             } else {
-                console.log(`${username} does not exist`);
                 res.json({ "message": "User does not exist" });
             }
         }
@@ -37,7 +32,6 @@ router.post('/:username', (req, res) => {
     User.find({ username: req.body.username }, function(err, succ) {
         const username = req.body.username;
         if(succ.length > 0) {
-            console.log(`${username} exists in the database!`);
             res.send(succ);
         } else {
             if(isValid(req.body)) {
@@ -49,11 +43,9 @@ router.post('/:username', (req, res) => {
                     profileCover: `https://s3.${process.env.REACT_APP_BUCKET_REGION}.amazonaws.com/${process.env.REACT_APP_BUCKET_NAME}/profile-cover-${username}`
                 })
                 newUser.save()
-                .then(() => console.log(`Saved ${username} to the database`))
                 .catch((err) => console.log(err));
                 res.send(true);
             } else {
-                console.log(`There was an error saving ${username} to the database`);
                 res.json(400);
             }
         }
@@ -70,7 +62,6 @@ router.post('/update/:username', async (req, res) => {
         profileCover: req.body.pCURL
     }
     var resp = await User.findOneAndUpdate({ username: username }, update, { new: true })
-    .then((res) => console.log(res))
     .catch((err) => console.log(err));
     res.json(true);
 })
@@ -81,7 +72,6 @@ router.get('/profile-images/:username', (req, res) => {
     var username = req.params.username;
     User.find({ 'username': username }, function(err, succ) {
         if(err) {
-            console.log(`An error occured:`, err);
             res.json(400);
         } else {
             if(succ.length > 0) {
@@ -91,7 +81,6 @@ router.get('/profile-images/:username', (req, res) => {
                 }
                 res.send(object);
             } else {
-                console.log(`${username} does not exist`);
                 res.json({ "message": "User does not exist" });
             }
         }
@@ -106,11 +95,9 @@ router.get('/check-following-status/:username/:searchedUsername', (req, res) => 
         if(err) {
             res.json({status: 'failed'})
         } else if(succ[0].followers.length === 0) {
-            console.log()
             res.json({ "error": "no followers" })
         } else {
             for(var i = 0; i <= succ[0].followers.length; i++) {
-                console.log(succ[0].followers[i]);
                 if(succ[0].followers[i].username === searchedUsername){
                     res.json({status: true})
                     break;

@@ -103,6 +103,7 @@ class PublicProfile extends Component {
     render() { 
         const { user, posts, status } = this.state;
         var time = moment(user.createdAt).format('LLL');
+        console.log(this.state.user)
         return (  
             user.following === undefined ?
             <div className="app-container">
@@ -113,7 +114,7 @@ class PublicProfile extends Component {
                 <div className="profile-banner">
                     <div className="profile-banner-image" style={{ backgroundImage: `url(${user.profileCover})`}} />
                     <div className="profile-banner-avatar">
-                        <Avatar size={200} src={posts[0] !== undefined ? `${user.profilePicture}` : 'www.google.com'}>M</Avatar>
+                        <Avatar size={200} src={user.profilePicture}>{user.username[0].toUpperCase()}</Avatar>
                     </div>
                 </div> 
                 <div className="profile-data">

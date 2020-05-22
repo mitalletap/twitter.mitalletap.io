@@ -75,7 +75,6 @@ export class App extends Component {
     })
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
       this.setState({ notifications: data[0].notifications })
     })
     .catch((err) => console.log(err));
@@ -100,7 +99,7 @@ export class App extends Component {
                       <Route exact path="/friends"><Friends {...this.props} /></Route>
                       <Route exact path="/profile"><Profile {...this.props} /></Route>
                       <Route exact path="/profile/edit"><EditProfile {...this.props} /></Route>
-                      <Route exact path="/notifications"><Notifications {...this.props} notifications={this.state.notifications} /></Route>
+                      {/* <Route exact path="/notifications"><Notifications {...this.props} notifications={this.state.notifications} /></Route> */}
                       <Route exact path="/create-post"><Post {...this.props} /></Route>
                       <Route path="/u/:username" component={PublicProfile} /> 
                     </Switch>
@@ -118,6 +117,4 @@ const mapStateToProps = (state) => {
   return state;
 }
 
-
-// export default withAuthenticator(App, { signUpConfig });
 export default withAuthenticator(connect(mapStateToProps, actionCreators)(App), {signUpConfig});

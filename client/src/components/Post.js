@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Input, Button, Row, Col } from 'antd';
+import { Input, Button, Row, Col, notification } from 'antd';
 import HelperFunction from '../helpers/helper';
 import '../App.css';
 import '@aws-amplify/ui/dist/style.css';
@@ -12,7 +12,7 @@ class Post extends Component {
     super(props);
     this.state = {
       message: '',
-      posted: false
+      success: ''
     }
   } 
 
@@ -20,12 +20,32 @@ class Post extends Component {
     this.setState({ message: e.target.value});
   }
 
+  success = type => {
+    notification[type]({
+      message: 'Tweet Posted',
+      description:
+        'Tweet successfully posted',
+        duration: 4
+    });
+  };
+
+  failure = type => {
+    notification[type]({
+      message: 'An error occurred',
+      description:
+        'Please try again later',
+        duration: 4
+    });
+  };
+
   handleSubmit = () => {
     const { message } = this.state;
     const { username } = this.props;
     const object = {
       username: username,
-      message: message
+      message: message,
+      likes: 0,
+      dislikes: 0
     }
     const URL = HelperFunction.getEnvironmentStatus();
     fetch(`http://${URL}/post/`, {
@@ -36,10 +56,13 @@ class Post extends Component {
       }
     })
     .then((res) => res.json())
+    .then((resp) => resp === true ? this.setState({ success: true }, () => this.success('success')) : 
+    this.setState({ success: false }, () => this.failure('error')))
     .catch(err => console.log(err));
   }
 
   render() { 
+    const { success } = this.state;
     return (  
       <div className="app-container">
         <Row gutter={[16, 16]} className="home-grid-row">

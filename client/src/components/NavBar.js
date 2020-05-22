@@ -39,7 +39,6 @@ class NavBar extends Component {
     
     render() { 
         const { notifications, profilePicture }  = this.state;
-        console.log(notifications)
         return (  
             profilePicture === '' ? 
             <div className="app-container">
@@ -51,7 +50,7 @@ class NavBar extends Component {
                     <Menu.Item className="navbar-menu-item-profile" key="profile" title={<span> PROFILE </span>}> <Link to="/profile"> <Avatar size={60} src={this.state.profilePicture} className="navbar-menu-item-avatar" />  </Link> </Menu.Item>
                     <Menu.Item className="navbar-menu-item" key="post"> <Link to="/"> <HomeOutlined style={{ color: "white" }}/> <span className="navbar-title"> HOME </span> </Link> </Menu.Item>
                     <Menu.Item className="navbar-menu-item" key="friends"> <Link to="/friends"> <TeamOutlined style={{ color: "white" }}/> <span className="navbar-title"> FRIENDS </span> </Link> </Menu.Item>
-                    <Menu.Item className="navbar-menu-item" key="notifications"> <Link to="/notifications"> <Badge dot={notifications === 0 ? false : true} offset={[15, 3]}> <BellOutlined style={{ color: "white" }}/>  <span className="navbar-title"> NOTIFICATIONS </span> </Badge> </Link> </Menu.Item>
+                    {/* <Menu.Item className="navbar-menu-item" key="notifications"> <Link to="/notifications"> <Badge dot={notifications === 0 ? false : true} offset={[15, 3]}> <BellOutlined style={{ color: "white" }}/>  <span className="navbar-title"> NOTIFICATIONS </span> </Badge> </Link> </Menu.Item> */}
                     <Menu.Item className="navbar-menu-item" key="create-post"> <Link to="/create-post"> <FormOutlined style={{ color: "white" }}/> <span className="navbar-title"> POST </span> </Link> </Menu.Item>
                     <Menu.Item className="navbar-menu-item" key="sign-out" onClick={this.handleSignout} style={{ bottom: "-45vh" }}> <Link to="/"> <ThunderboltOutlined style={{ color: "white" }}/> <span className="navbar-title"> SIGN OUT </span> </Link> </Menu.Item>
                 </Menu>

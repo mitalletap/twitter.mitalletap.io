@@ -56,7 +56,6 @@ export class Home extends Component {
     const { username } = this.props;
     const { posts } = this.state;
     return (  
-
       posts.length === 0 ? 
       <div className="app-container">
           <Spin className="loading" indicator={<LoadingOutlined style={{ fontSize: 240 }} spin />} />
@@ -66,7 +65,7 @@ export class Home extends Component {
           return (
             <Row gutter={[16, 16]} id={`row-${index}`} className="home-grid-row">
               <Col flex="auto" span={8} className="home-grid-col grid-col-min" />
-              <Col flex="500px" align="middle" span={8} className="home-grid-col" style={{ minWidth: "300px" }}> <PostItem username={post.username} message={post.message} createdAt={post.createdAt} _id={post._id} profilePicture={post.profilePicture}/> </Col>
+              <Col flex="500px" align="middle" span={8} className="home-grid-col" style={{ minWidth: "300px" }}> <PostItem username={post.username} message={post.message} createdAt={post.createdAt} _id={post._id} profilePicture={post.profilePicture} likes={post.likes} dislikes={post.dislikes}/> </Col>
               <Col flex="auto" span={8} className="home-grid-col grid-col-min" />
             </Row>
           )

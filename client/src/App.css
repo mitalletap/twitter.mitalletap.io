@@ -70,6 +70,10 @@ h1 {
   background-color: var(--background-default);
 }
 
+.post-item-content {
+  color: white !important;
+}
+
 .post-item-time {
   display: block;
   margin-top: 20px;
@@ -86,6 +90,26 @@ h1 {
   color: #a1afb2 !important;
 } 
 
+.post-item-progress {
+  display: block;
+  width: 50%;
+}
+
+.post-item-likes-dislikes {
+  display: block;
+  float: left;
+  color: #a1afb2 !important;
+  
+}
+
+.ant-comment-content-author-name {
+  color: white !important;
+}
+
+.ant-comment-content-detail {
+  display: inline-block;
+  width: 90%;
+}
 
 
 /* Profile */

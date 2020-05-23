@@ -126,7 +126,16 @@ router.post('/:type/:id/:username', (req, res) => {
                 Post.findOneAndUpdate({ _id: id }, { $pull : { likes: userWhoLiked, dislikes: userWhoLiked } }, { new: true })
                 .catch((err) => console.log(err));
             }
-            res.json({ success: true });    
+
+            Post.find({ _id: id }, function (er, suc) {
+                if(er) {
+                    res.json({ erro: "Post not found" });
+                } else{
+                    console.log(suc[0])
+                    res.json({ likesLength: suc[0].likes.length, dislikesLength: suc[0].dislikes.length });   
+                }
+            })
+ 
         }
     });
 });

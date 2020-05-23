@@ -50,6 +50,7 @@ h1 {
   background-color: var(--primary-color);
   padding-top: 100px;
   padding-bottom: 20px;
+  height: 100%;
 }
 
 .home-grid-row {

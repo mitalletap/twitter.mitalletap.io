@@ -103,7 +103,6 @@ class PublicProfile extends Component {
     render() { 
         const { user, posts, status } = this.state;
         var time = moment(user.createdAt).format('LLL');
-        console.log(this.state.user)
         return (  
             user.following === undefined ?
             <div className="app-container">

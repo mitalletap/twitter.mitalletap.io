@@ -82,7 +82,7 @@ class Profile extends Component {
                         return (
                             <Row gutter={[16, 16]} id={`row-${index}`} className="profile-grid-row">
                                 <Col flex="auto" span={8} className="profile-grid-col grid-col-min" />
-                                <Col flex="500px" align="middle" span={8} className="profile-grid-col" style={{ minWidth: "300px" }}> <PostItem username={post.username} message={post.message} createdAt={post.createdAt} _id={post._id} profilePicture={user.profilePicture}/> </Col>
+                                <Col flex="500px" align="middle" span={8} className="profile-grid-col" style={{ minWidth: "300px" }}> <PostItem username={post.username} message={post.message} createdAt={post.createdAt} _id={post._id} profilePicture={user.profilePicture} likes={post.likes} dislikes={post.dislikes}/> </Col>
                                 <Col flex="auto" span={8} className="profile-grid-col grid-col-min" />
                             </Row>
                         )
